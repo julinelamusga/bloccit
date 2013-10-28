@@ -46,5 +46,5 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'faker'
-
 gem 'devise'
+gem 'cancan'
