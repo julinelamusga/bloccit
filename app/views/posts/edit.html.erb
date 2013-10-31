@@ -4,13 +4,13 @@
     <p>Guidelines for new posts:</p>
     <ul>
       <li>Make sure content is appropriate.</li>
-      <li>Blah blah blah</li>
-      <li>Blah blah blah</li>
-      <li>Blah blah blah</li>
+      <li>Don't be a d-bag</li>
+      <li>If you don't have something nice to say, don't say anything at all!</li>
+      <li>You're scum between my toes.</li>
     </ul>
   </div>
   <div class="span-6">
-    <%= form_for @post, html: { class: 'form-horizontal' } do |f| %>
+    <%= form_for [@topic, @post], html: { class: 'form-horizontal' } do |f| %>
       <div class="control-group">
         <%= f.label :title, class: 'control-label' %>
         <div class="controls">
