@@ -5,18 +5,18 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @topic = Topic.find(params[:topic_id])
+    @topic = @post.topic
   end
 
   def new
-    @topic = Topic.find(params[:topic_id])
     @post = Post.new
+    @topic = @post.topic
     authorize! :create, Post, message: "Yo ass need ta be a member ta create a freshly smoked up post. "
   end
 
   def create
-    @topic = Topic.find(params[:topic_id])
     @post = current_user.posts.build(params[:post])
+    @topic = @post.topic
     @post.topic = @topic
     authorize! :create, @post, message: "Yo ass need ta be signed up ta do dis shit."
     if @post.save
@@ -29,8 +29,8 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])
+    @topic = @post.topic
     authorize! :edit, @post, message: "Yo ass need ta own tha post ta edit dat shit."
   end
 
