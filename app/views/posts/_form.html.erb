@@ -22,7 +22,10 @@
     </div>
   <% end %>
   <div class="control-group">
+    <%= image_tag(post.image.thumb.url) if post.image? %>
+    <%= f.label :image, class: 'control-label' %>
     <div class="controls">
+      <%= f.file_field :image %>
       <%= f.submit "Save", class: 'btn' %>
     </div>
   </div>
