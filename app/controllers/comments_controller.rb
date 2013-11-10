@@ -13,6 +13,22 @@ class CommentsController < ApplicationController
         flash[:error] = "There was a error savin tha comment. Please try again."
     end
     redirect_to @post
+  end
 
+  def destroy
+    @topic = Topic.find(params[:topic_id])
+    @post = @topic.posts.find(params[:post_id])
+
+    @comment = @post.comments.find(params[:id])
+
+    authorize! :destroy, @comment, message: "Yo ass need ta own tha comment ta delete dat shit."
+    if @comment.destroy
+      flash[:notice] = "Comment was removed sucka."
+      redirect_to [@topic, @post]
+    else
+      flash[:error] = "Comment couldn't be deleted. Y'all KNOW dat shit! This type'a shiznit happens all tha time. Try again.
+"
+      redirect_to [@topic, @post]
+    end
   end
 end

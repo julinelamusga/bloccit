@@ -29,5 +29,8 @@
     <% if can? :create, Post %>
       <%= link_to "New Post", new_topic_post_path(@topic), class: 'btn btn-large btn-block' %>
     <% end %>
+    <% if can? :destroy, @topic %>
+      <%= link_to "Delete Topic", @topic, method: :delete, class: 'btn btn-large btn-block btn-danger', confirm: 'Is you shizzle you wanna delete dis topic??' %> 
+    <% end %>
   </div>
 </div>

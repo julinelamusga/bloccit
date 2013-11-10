@@ -40,4 +40,17 @@ class TopicsController < ApplicationController
       render :edit
     end
   end
+
+  def destroy
+    @topic = Topic.find(params[:id])
+    name = @topic.name
+    authorize! :destroy, @topic, message: "Yo ass need ta own tha topic ta delete dat shit."
+    if @topic.destroy
+      flash[:notice] = "\"#{name}\" was deleted sucka."
+      redirect_to topics_path
+    else
+      flash[:error] = "There be an error deleting yo topic."
+      render :show
+    end
+  end
 end
