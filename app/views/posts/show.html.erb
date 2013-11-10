@@ -17,4 +17,8 @@
   </div>
 </div>
 
-<p><%= @post.body %></p>
+<h2>Comments</h2>
+
+<%= render @comments %>
+<h3>Add a comment biotch.</h3>
+<%= render partial: 'comments/form', locals: { comment: @comment, post: @post } %>

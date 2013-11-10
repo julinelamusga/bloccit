@@ -27,15 +27,19 @@ rand(4..10).times do
     topic = topics.first
     p = u.posts.create(
       title: Faker::Lorem.words(rand(1..10)).join(" "), 
-      body: Faker::Lorem.paragraphs(rand(1..4)).join("\n"))
+      body: Faker::Lorem.paragraphs(rand(1..4)).join("\n"),
+      topic: topic
+    )
     # set the created_at to a time within the past year
     p.update_attribute(:created_at, Time.now - rand(600..31536000))
 
     topics.rotate!
 
     rand(3..7).times do
-      p.comments.create(
-        body: Faker::Lorem.paragraphs(rand(1..2)).join("\n"))
+      u.comments.create(
+        body: Faker::Lorem.paragraphs(rand(1..2)).join("\n"),
+        post: p
+      )
     end
   end
 end
