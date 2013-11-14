@@ -11,6 +11,7 @@ end
 
 group :development do
   gem 'sqlite3'
+ # gem 'thin'
 end
 
 
@@ -55,3 +56,4 @@ gem 'fog'
 gem 'figaro'
 gem 'will_paginate', '~> 3.0'
 gem 'omniauth-facebook'
+
