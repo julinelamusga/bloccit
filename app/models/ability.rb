@@ -10,6 +10,7 @@ class Ability
       can :manage, Post, :user_id => user.id
       can :create, Comment
       can :create, Vote
+      can :manage, Favorite, user_id: user.id
     end
 
     # Moderators can delete any post
