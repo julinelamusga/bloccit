@@ -5,8 +5,8 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    authorize@ :read, @topic, message: "Yo ass need ta be signed in ta do that ish."
     @topic = @post.topic
+    authorize! :read, @topic, message: "Yo ass need ta be signed in ta do that ish."
     @comments = @post.comments
     @comment = Comment.new
   end
