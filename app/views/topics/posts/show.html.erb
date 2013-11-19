@@ -33,7 +33,7 @@
 
 <h2>Comments</h2>
 
-<%= render @comments %>
+<%= render partial: 'comments/comment', collection: @comments %>
 
 <h3>Add a comment biotch.</h3>
 <%= render partial: 'comments/form', locals: {topic: @topic, comment: @comment, post: @post } %>
