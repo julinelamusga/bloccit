@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  respond_to :html, :js
+
   def create
     authorize! :create, Comment, message: "Yo ass need ta be signed up ta do dis shit."
     
@@ -20,15 +22,16 @@ class CommentsController < ApplicationController
     @post = @topic.posts.find(params[:post_id])
 
     @comment = @post.comments.find(params[:id])
-
     authorize! :destroy, @comment, message: "Yo ass need ta own tha comment ta delete dat shit."
+    
     if @comment.destroy
       flash[:notice] = "Comment was removed sucka."
-      redirect_to [@topic, @post]
     else
-      flash[:error] = "Comment couldn't be deleted. Y'all KNOW dat shit! This type'a shiznit happens all tha time. Try again.
-"
-      redirect_to [@topic, @post]
+      flash[:error] = "Comment couldn't be deleted. Y'all KNOW dat shit! This type'a shiznit happens all tha time. Try again."
+    end
+
+    respond_with(@comment) do |f|
+      f.html { redirect_to [@topic, @post] }
     end
   end
 end
