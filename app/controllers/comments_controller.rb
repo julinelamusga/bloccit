@@ -2,19 +2,25 @@ class CommentsController < ApplicationController
   respond_to :html, :js
 
   def create
-    authorize! :create, Comment, message: "Yo ass need ta be signed up ta do dis shit."
-    
-    @comment = current_user.comments.build(params[:comment])
-    @post = Post.find(params[:post_id])
-    @comment.post = @post
+    @topic = Topic.find(params[:topic_id])
+    @post = @topic.posts.find(params[:post_id])
+    @comments = @post.comments
 
+    @comment = current_user.comments.build(params[:comment])
+    @comment.post = @post
+    @new_comment = Comment.new
+
+    authorize! :create, @comment, message: "You need be signed in to do that."
 
     if @comment.save
-        flash[:notice] = "Yo crazy-ass comment was saved. Y'all KNOW dat shit, muthafucka! "
+      flash[:notice] = "Comment was created."
     else
-        flash[:error] = "There was a error savin tha comment. Please try again."
+      flash[:error] = "There was an error saving the comment. Please try again."
     end
-    redirect_to @post
+
+    respond_with(@comment) do |f|
+      f.html { redirect_to [@topic, @post] }
+    end
   end
 
   def destroy
